@@ -18,13 +18,19 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       final latitude = await SharedPreferencesHelper.getLatitude();
       emit(HomePageLoadingState());
       try {
-        final weatherData = await locationRepo.getWeatherContent(
-            latitude: latitude ?? 0.0, longitude: longitude ?? 0.0);
-        emit(HomePageLoadedState(weatherInformationResponse: weatherData));
-        print(weatherData);
-      } catch (e) {
-        print(e);
-      }
+        final currentWeatherContent =
+            await locationRepo.getCurrentWeatherContent(
+          latitude: latitude ?? 0.0,
+          longitude: longitude ?? 0.0,
+        );
+        // final hourWeatherContent = await locationRepo.getHourWeatherContent(
+        //   latitude: latitude ?? 0.0,
+        //   longitude: longitude ?? 0.0,
+        // );
+        emit(HomePageLoadedState(
+          currentWeatherInformationResponse: currentWeatherContent,
+        ));
+      } catch (e) {}
     });
   }
 }

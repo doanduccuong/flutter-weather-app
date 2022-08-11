@@ -11,10 +11,14 @@ class HomePageInitial extends HomePageState {}
 class HomePageLoadingState extends HomePageState {}
 
 class HomePageLoadedState extends HomePageState {
-  final WeatherInformationResponse? weatherInformationResponse;
+  final WeatherInformationResponse? currentWeatherInformationResponse;
 
-  HomePageLoadedState({required this.weatherInformationResponse});
+  HomePageLoadedState({
+    required this.currentWeatherInformationResponse,
+  });
 
   @override
-  List<Object?> get props => [weatherInformationResponse];
+  List<Object?> get props => [
+        currentWeatherInformationResponse,
+      ];
 }

@@ -5,6 +5,7 @@ import 'package:retrofit/retrofit.dart';
 import '../models/entities/notification/notification_entity.dart';
 import '../models/entities/token_entity.dart';
 import '../models/response/weather_information_response.dart';
+
 part 'api_client.g.dart';
 
 @RestApi()
@@ -26,8 +27,15 @@ abstract class ApiClient {
   );
 
   ///Current weather
-  @GET("")
+  @GET("/weather")
   Future<WeatherInformationResponse?> getWeatherContent(
+    @Query('appid') String apiKey,
+    @Query('lat') double latitude,
+    @Query('lon') double longitude,
+  );
+
+  @GET("/forecast/hourly")
+  Future<WeatherInformationResponse?> getHourlyWeatherContent(
     @Query('appid') String apiKey,
     @Query('lat') double latitude,
     @Query('lon') double longitude,

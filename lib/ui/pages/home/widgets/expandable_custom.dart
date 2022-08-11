@@ -23,7 +23,7 @@ class _ExpandableCustomState extends State<ExpandableCustom> {
           child: Column(
             children: [
               Expandable(
-                collapsed: SizedBox(),
+                collapsed: const SizedBox(),
                 expanded: _expandedWidget(),
               ),
               Builder(
@@ -62,7 +62,40 @@ Widget _collapsedWidget() {
 
 Widget _expandedWidget() {
   return Container(
-    height: 500,
-    decoration: BoxDecoration(color: AppColors.backgroundColor),
+    padding: EdgeInsets.only(top: 10),
+    decoration: const BoxDecoration(color: AppColors.backgroundColor),
+    child: Column(children: [
+      Text(
+        "Forcast for 7 Day",
+        style: AppTextStyle.white.copyWith(fontWeight: FontWeight.w600),
+      ),
+      Wrap(
+        children: List.generate(
+            7,
+            (index) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "Sun",
+                        style: AppTextStyle.white
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        "75% rain",
+                        style: AppTextStyle.white
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        "20/24",
+                        style: AppTextStyle.white
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                )),
+      ),
+    ]),
   );
 }

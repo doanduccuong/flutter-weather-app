@@ -56,6 +56,7 @@ class DatabaseConfig {
 
 class LocationAPIConfig {
   static const String apiKey = '636df07e6e7199992dee41289db80f68';
+  static const String apiKey1 = "877fb86140037760886332a3bc66db90";
 }
 
 class UpGraderAPIConfig {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/models/enums/weather_characteristic_enum.dart';
 import 'package:flutter_base/repositories/weather_repository.dart';
+import 'package:flutter_base/route_config/route_name_config.dart';
 import 'package:flutter_base/ui/pages/home/bloc/home_page_bloc.dart';
 import 'package:flutter_base/ui/pages/home/widgets/expandable_custom.dart';
 import 'package:flutter_base/ui/pages/home/widgets/movie_characteristic_item.dart';
@@ -34,14 +35,15 @@ class _HomePageState extends State<HomePage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is HomePageLoadedState) {
-            final weatherData = state.weatherInformationResponse;
-            final cityName = weatherData?.name ?? "";
-            final description = weatherData?.weather?[0]?.description ?? "";
-            final currentCalculationTime = weatherData?.dt ?? 0;
-            final temperature = weatherData?.main?.temp ?? 0.0;
-            final windRate = weatherData?.wind?.speed ?? 0.0;
-            final pressure = weatherData?.main?.pressure ?? 0.0;
-            final humidity = weatherData?.main?.humidity ?? 0.0;
+            final currentWeatherData = state.currentWeatherInformationResponse;
+            final cityName = currentWeatherData?.name ?? "";
+            final description =
+                currentWeatherData?.weather?[0]?.description ?? "";
+            final currentCalculationTime = currentWeatherData?.dt ?? 0;
+            final temperature = currentWeatherData?.main?.temp ?? 0.0;
+            final windRate = currentWeatherData?.wind?.speed ?? 0.0;
+            final pressure = currentWeatherData?.main?.pressure ?? 0.0;
+            final humidity = currentWeatherData?.main?.humidity ?? 0.0;
             final String currentTime = AppDateUtils.toDateTimeString(
                 DateTime.fromMicrosecondsSinceEpoch(currentCalculationTime));
             return Scaffold(
@@ -59,7 +61,8 @@ class _HomePageState extends State<HomePage> {
                         pressure: pressure,
                         humidity: humidity,
                       ),
-                      _buildMidWidget(),
+                      _buildMidWidget(currentTime: currentTime),
+                      const SizedBox(height: 20),
                       _buildBottomWidget()
                     ],
                   ),
@@ -100,9 +103,15 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(
-                Icons.add,
-                color: AppColors.textWhite,
+              Builder(
+                builder: (context) => IconButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, RouteNameConfgi.settingPage),
+                  icon: const Icon(
+                    Icons.add,
+                    color: AppColors.textWhite,
+                  ),
+                ),
               ),
               Text(cityName, style: homeTextStyle.copyWith(fontSize: 20)),
               const Icon(
@@ -112,9 +121,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Text(currentTime,
-                  style: homeTextStyle.copyWith(fontSize: 25))),
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              currentTime,
+              style: homeTextStyle.copyWith(fontSize: 25),
+            ),
+          ),
           Text(
             temperature.toString(),
             style: homeTextStyle.copyWith(
@@ -166,17 +178,30 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildMidWidget() {
+  Widget _buildMidWidget({
+    required String currentTime,
+  }) {
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         decoration: const BoxDecoration(color: AppColors.backgroundColor),
         width: double.infinity,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(
-            5,
-            (index) => WeatherPeriodItem(),
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              currentTime,
+              style: homeTextStyle.copyWith(fontSize: 25),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                5,
+                (index) {
+                  return const WeatherPeriodItem();
+                },
+              ),
+            )
+          ],
         ));
   }
 }

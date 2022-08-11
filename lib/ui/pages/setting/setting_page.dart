@@ -43,7 +43,7 @@ class _SettingChildPageState extends State<SettingChildPage> {
       appBar: AppBarWidget(
         title: S.of(context).settings_title,
         onBackPressed: () {
-          Get.back();
+          Navigator.pop(context);
         },
       ),
       body: Container(

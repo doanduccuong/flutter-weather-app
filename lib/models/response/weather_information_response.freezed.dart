@@ -26,6 +26,7 @@ mixin _$WeatherInformationResponse {
   int? get dt => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   TemperatureContent? get main => throw _privateConstructorUsedError;
+  List<HourWeatherContent?>? get list => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $WeatherInformationResponseCopyWith<$Res> {
       WindContent? wind,
       int? dt,
       String? name,
-      TemperatureContent? main});
+      TemperatureContent? main,
+      List<HourWeatherContent?>? list});
 
   $WindContentCopyWith<$Res>? get wind;
   $TemperatureContentCopyWith<$Res>? get main;
@@ -65,6 +67,7 @@ class _$WeatherInformationResponseCopyWithImpl<$Res>
     Object? dt = freezed,
     Object? name = freezed,
     Object? main = freezed,
+    Object? list = freezed,
   }) {
     return _then(_value.copyWith(
       weather: weather == freezed
@@ -87,6 +90,10 @@ class _$WeatherInformationResponseCopyWithImpl<$Res>
           ? _value.main
           : main // ignore: cast_nullable_to_non_nullable
               as TemperatureContent?,
+      list: list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<HourWeatherContent?>?,
     ));
   }
 
@@ -126,7 +133,8 @@ abstract class _$$_WeatherInformationResponseCopyWith<$Res>
       WindContent? wind,
       int? dt,
       String? name,
-      TemperatureContent? main});
+      TemperatureContent? main,
+      List<HourWeatherContent?>? list});
 
   @override
   $WindContentCopyWith<$Res>? get wind;
@@ -154,6 +162,7 @@ class __$$_WeatherInformationResponseCopyWithImpl<$Res>
     Object? dt = freezed,
     Object? name = freezed,
     Object? main = freezed,
+    Object? list = freezed,
   }) {
     return _then(_$_WeatherInformationResponse(
       weather: weather == freezed
@@ -176,6 +185,10 @@ class __$$_WeatherInformationResponseCopyWithImpl<$Res>
           ? _value.main
           : main // ignore: cast_nullable_to_non_nullable
               as TemperatureContent?,
+      list: list == freezed
+          ? _value._list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<HourWeatherContent?>?,
     ));
   }
 }
@@ -188,8 +201,10 @@ class _$_WeatherInformationResponse implements _WeatherInformationResponse {
       this.wind,
       this.dt,
       this.name,
-      this.main})
-      : _weather = weather;
+      this.main,
+      final List<HourWeatherContent?>? list})
+      : _weather = weather,
+        _list = list;
 
   factory _$_WeatherInformationResponse.fromJson(Map<String, dynamic> json) =>
       _$$_WeatherInformationResponseFromJson(json);
@@ -211,10 +226,18 @@ class _$_WeatherInformationResponse implements _WeatherInformationResponse {
   final String? name;
   @override
   final TemperatureContent? main;
+  final List<HourWeatherContent?>? _list;
+  @override
+  List<HourWeatherContent?>? get list {
+    final value = _list;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'WeatherInformationResponse(weather: $weather, wind: $wind, dt: $dt, name: $name, main: $main)';
+    return 'WeatherInformationResponse(weather: $weather, wind: $wind, dt: $dt, name: $name, main: $main, list: $list)';
   }
 
   @override
@@ -226,7 +249,8 @@ class _$_WeatherInformationResponse implements _WeatherInformationResponse {
             const DeepCollectionEquality().equals(other.wind, wind) &&
             const DeepCollectionEquality().equals(other.dt, dt) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.main, main));
+            const DeepCollectionEquality().equals(other.main, main) &&
+            const DeepCollectionEquality().equals(other._list, _list));
   }
 
   @JsonKey(ignore: true)
@@ -237,7 +261,8 @@ class _$_WeatherInformationResponse implements _WeatherInformationResponse {
       const DeepCollectionEquality().hash(wind),
       const DeepCollectionEquality().hash(dt),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(main));
+      const DeepCollectionEquality().hash(main),
+      const DeepCollectionEquality().hash(_list));
 
   @JsonKey(ignore: true)
   @override
@@ -260,7 +285,8 @@ abstract class _WeatherInformationResponse
       final WindContent? wind,
       final int? dt,
       final String? name,
-      final TemperatureContent? main}) = _$_WeatherInformationResponse;
+      final TemperatureContent? main,
+      final List<HourWeatherContent?>? list}) = _$_WeatherInformationResponse;
 
   factory _WeatherInformationResponse.fromJson(Map<String, dynamic> json) =
       _$_WeatherInformationResponse.fromJson;
@@ -275,6 +301,8 @@ abstract class _WeatherInformationResponse
   String? get name;
   @override
   TemperatureContent? get main;
+  @override
+  List<HourWeatherContent?>? get list;
   @override
   @JsonKey(ignore: true)
   _$$_WeatherInformationResponseCopyWith<_$_WeatherInformationResponse>

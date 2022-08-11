@@ -19,7 +19,7 @@ extension EnvironmentExt on Environment {
   String get baseUrl {
     switch (this) {
       case Environment.dev:
-        return "https://api.openweathermap.org/data/2.5/weather";
+        return "https://api.openweathermap.org/data/2.5";
       case Environment.stg:
         return "https://api.themoviedb.org";
       case Environment.prod:
